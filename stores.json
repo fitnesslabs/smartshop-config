@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "about": "Smart Shop store settings. The app ships with this file and downloads newer signed copies from GitHub. Raise the version and run Tools/publish-store-settings.sh to publish a change.",
+  "version": 2,
+  "about": "Smart Shop store settings. The app ships with this file and downloads newer signed copies from GitHub. Raise the version and run Tools/publish-store-settings.sh to publish a change. Every store here was checked from a UK Mac on 1 Nov 2026: its search page showed products. Kroger and Coles block or blank UK visitors, and Dunnes Stores shows a bot check, so they are left out until they can be checked.",
   "stores": [
     {
       "id": "Tesco",
@@ -37,6 +37,66 @@
       "country": "GB",
       "search": "https://www.ocado.com/search?q=",
       "basket": "https://www.ocado.com/basket"
+    },
+    {
+      "id": "Walmart",
+      "country": "US",
+      "search": "https://www.walmart.com/search?q=",
+      "basket": "https://www.walmart.com/cart"
+    },
+    {
+      "id": "Target",
+      "country": "US",
+      "search": "https://www.target.com/s?searchTerm=",
+      "basket": "https://www.target.com/cart"
+    },
+    {
+      "id": "Walmart Canada",
+      "country": "CA",
+      "search": "https://www.walmart.ca/en/search?q=",
+      "basket": "https://www.walmart.ca/en/cart"
+    },
+    {
+      "id": "Real Canadian Superstore",
+      "country": "CA",
+      "search": "https://www.realcanadiansuperstore.ca/search?search-bar=",
+      "basket": "https://www.realcanadiansuperstore.ca/cartReview"
+    },
+    {
+      "id": "Loblaws",
+      "country": "CA",
+      "search": "https://www.loblaws.ca/search?search-bar=",
+      "basket": "https://www.loblaws.ca/cartReview"
+    },
+    {
+      "id": "Voilà",
+      "country": "CA",
+      "search": "https://voila.ca/products/search?q=",
+      "basket": "https://voila.ca/basket"
+    },
+    {
+      "id": "Woolworths",
+      "country": "AU",
+      "search": "https://www.woolworths.com.au/shop/search/products?searchTerm=",
+      "basket": "https://www.woolworths.com.au/shop/cart"
+    },
+    {
+      "id": "IGA",
+      "country": "AU",
+      "search": "https://www.igashop.com.au/search?q=",
+      "basket": "https://www.igashop.com.au/checkout"
+    },
+    {
+      "id": "Tesco Ireland",
+      "country": "IE",
+      "search": "https://www.tesco.ie/groceries/en-IE/search?query=",
+      "basket": "https://www.tesco.ie/groceries/en-IE/trolley"
+    },
+    {
+      "id": "SuperValu",
+      "country": "IE",
+      "search": "https://shop.supervalu.ie/sm/delivery/rsid/5550/results?q=",
+      "basket": "https://shop.supervalu.ie/sm/delivery/rsid/5550/cart"
     }
   ],
   "scripts": {
@@ -61,7 +121,7 @@
       "    var adds = [];",
       "    for (var i = 0; i < all.length; i++) {",
       "      var label = (all[i].innerText || all[i].textContent || '').trim();",
-      "      if (/^add(\\s|$)/i.test(label)) { adds.push(all[i]); }",
+      "      if (/^(\\+\\s*)?add(\\s|$)/i.test(label)) { adds.push(all[i]); }",
       "    }",
       "    var addsInside = function (el) {",
       "      var n = 0;",
@@ -165,7 +225,7 @@
       "(function () {",
       "  // Only the supermarket's own \"checkout\" or \"book a slot\" button, labelled exactly that, on show and",
       "  // enabled. Never anything that pays, places, confirms or orders, or shows a price.",
-      "  var wanted = /^(book a slot|choose a slot|book delivery|book a delivery slot|go to checkout|proceed to checkout|continue to checkout|checkout)\\s*[>›→]?$/i;",
+      "  var wanted = /^(book a slot|choose a slot|book delivery|book a delivery slot|go to checkout|proceed to checkout|continue to checkout|checkout|check out|go to cart checkout)\\s*[>›→]?$/i;",
       "  var never = /(pay|place|confirm|order|submit|£|\\$|€)/i;",
       "  var nodes = document.querySelectorAll('button, a, [role=\"button\"]');",
       "  for (var i = 0; i < nodes.length; i++) {",
